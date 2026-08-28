@@ -35,7 +35,7 @@ Typical columns include: `Order Date`, `Ship Date`, `Category`, `Sub-Category`, 
 - numpy
 - matplotlib
 - seaborn
-
+ 
 Install dependencies:
 
 ```bash
