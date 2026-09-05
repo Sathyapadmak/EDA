@@ -68,92 +68,10 @@ pip install pandas numpy matplotlib seaborn
 | Aggregation | Total sales grouped by `Category` |
 | Visualization | Bar chart of sales by category; histogram of sales distribution |
 
-## 📈 Example: Code & Output
+## 📈 Sample Outputs
 
-Below is a sample run showing the notebook's logic in action (numbers below are from a small demo dataset used to illustrate the workflow — your real output will reflect your own `samplesuperstore.csv`).
-
-### 1. Load and inspect the data
-
-```python
-import pandas as pd
-df = pd.read_csv("/content/samplesuperstore.csv")
-df.info()
-```
-
-```
-<class 'pandas.DataFrame'>
-RangeIndex: 200 entries, 0 to 199
-Data columns (total 5 columns):
- #   Column      Non-Null Count  Dtype  
----  ------      --------------  -----  
- 0   Order Date  200 non-null    object
- 1   Ship Date   200 non-null    object
- 2   Category    200 non-null    object
- 3   Region      200 non-null    object
- 4   Sales       200 non-null    float64
-dtypes: float64(1), object(4)
-memory usage: 7.9 KB
-```
-
-### 2. Parse dates and engineer `Delivery Days`
-
-```python
-df['Order Date'] = pd.to_datetime(df['Order Date'], format="mixed")
-df['Ship Date'] = pd.to_datetime(df['Ship Date'], format="mixed")
-df['Delivery Days'] = (df['Ship Date'] - df['Order Date']).dt.days
-df.head()
-```
-
-```
-  Order Date  Ship Date         Category Region   Sales  Delivery Days
-0 2023-01-01 2023-01-05        Furniture   West  164.34              4
-1 2023-01-04 2023-01-09  Office Supplies   West   68.55              5
-2 2023-01-07 2023-01-10  Office Supplies   West   51.77              3
-3 2023-01-10 2023-01-15        Furniture  South  265.61              5
-4 2023-01-13 2023-01-18  Office Supplies   East  193.44              5
-```
-
-### 3. Aggregate sales by category
-
-```python
-category_sales = df.groupby('Category')['Sales'].sum()
-category_sales
-```
-
-```
-Category
-Furniture          15419.67
-Office Supplies    28919.40
-Technology         18756.14
-Name: Sales, dtype: float64
-```
-
-### 4. Visualize
-
-```python
-import matplotlib.pyplot as plt
-
-category_sales.plot(kind='bar', figsize=(8,5))
-plt.title("Sales by Category")
-plt.ylabel("Total Sales")
-plt.show()
-```
-
-**Output:**
-
-<img width="721" height="560" alt="image" src="https://github.com/user-attachments/assets/1eed901d-9595-4674-8ca3-4c8fba26e4e2" />
-
-
-```python
-import seaborn as sns
-
-plt.figure(figsize=(8,5))
-sns.histplot(df['Sales'], bins=30)
-plt.title("Sales Distribution")
-plt.show()
-```
-
-This produces a histogram showing how individual sale amounts are distributed (right-skewed, with most sales clustered at lower values and a long tail of higher-value orders).
+- **Sales by Category** — bar chart comparing total sales across product categories
+- **Sales Distribution** — histogram showing the spread of individual sale amounts
 
 ## 🤝 Contributing
 
